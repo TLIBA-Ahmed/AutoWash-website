@@ -9,12 +9,15 @@ $email = strip_tags(htmlspecialchars($_POST['email']));
 $m_subject = strip_tags(htmlspecialchars($_POST['subject']));
 $message = strip_tags(htmlspecialchars($_POST['message']));
 
-$to = "info@example.com"; // Change this email to your //
+$to = "ahmedtlyba010@gmail.com";
 $subject = "$m_subject:  $name";
-$body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\n\nEmail: $email\n\nSubject: $m_subject\n\nMessage: $message";
-$header = "From: $email";
-$header .= "Reply-To: $email";	
+$body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email\n\nSubject: $m_subject\n\nMessage: $message";
+$header = "From: $email\r\n"; // Separate headers with "\r\n"
+$header .= "Reply-To: $email\r\n";	
 
-if(!mail($to, $subject, $body, $header))
+if(!mail($to, $subject, $body, $header)) {
   http_response_code(500);
+  echo "Failed to send email."; // Provide an error message
+  error_log("Failed to send email."); // Log the error
+}
 ?>
