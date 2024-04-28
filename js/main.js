@@ -1,7 +1,7 @@
 (function ($) {
     "use strict";
     
-    // loader
+
     var loader = function () {
         setTimeout(function () {
             if ($('#loader').length > 0) {
@@ -11,7 +11,7 @@
     };
     loader();
     
-    // Back to top button
+    
     $(window).scroll(function () {
         if ($(this).scrollTop() > 200) {
             $('.back-to-top').fadeIn('slow');
@@ -25,7 +25,7 @@
     });
     
     
-    // Sticky Navbar
+    
     $(window).scroll(function () {
         if ($(this).scrollTop() > 90) {
             $('.nav-bar').addClass('nav-sticky');
@@ -37,7 +37,7 @@
     });
     
     
-    // Dropdown on mouse hover
+    
     $(document).ready(function () {
         function toggleNavbarMethod() {
             if ($(window).width() > 992) {
@@ -55,7 +55,7 @@
     });
 
     
-    // Main carousel
+    
     $(".carousel .owl-carousel").owlCarousel({
         autoplay: true,
         animateOut: 'fadeOut',
@@ -72,14 +72,14 @@
     });
 
     
-    // Facts counter
+    
     $('[data-toggle="counter-up"]').counterUp({
         delay: 10,
         time: 2000
     });
 
 
-    // Testimonials carousel
+    
     $(".testimonials-carousel").owlCarousel({
         center: true,
         autoplay: true,
@@ -103,7 +103,7 @@
     });
     
     
-    // Related post carousel
+    
     $(".related-slider").owlCarousel({
         autoplay: true,
         dots: false,
