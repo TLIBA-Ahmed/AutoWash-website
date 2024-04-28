@@ -1,23 +1,30 @@
 <?php
+if ($_SERVER['REQUEST_METHOD']== 'POST'){
+$name = $_POST['name'];
+$email = $_POST['email'];
+$subject = $_POST['subject'];
+$message = $_POST['message'];}
+
 if(empty($_POST['name']) || empty($_POST['subject']) || empty($_POST['message']) || !filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
   http_response_code(500);
-  exit();
+  exit();}
+
+
+$conn = new mysqli("localhost","WebISAMM" , "ahmed2003", "contact");
+
+if ($conn ->connect_error){
+  die("Connection Failed : ". $conn ->connect_error);
+}else{
+  echo "connected";
+  $stmt = $conn -> prepare("insert into form_contact (name, email, subject, message ) values ()");
+  $stmt -> bind_param("ssss", $name, $email,$subject,$message);
+  $stmt -> execute();
+  echo "Your message has been sent.";
+  $stmt -> close();
+  $conn->close();}
+
+if($conn){
+  $sql = "insert into 'form_contact' ( name, email, subject, message) values($name,$email,$subject,$message)";
 }
 
-$name = strip_tags(htmlspecialchars($_POST['name']));
-$email = strip_tags(htmlspecialchars($_POST['email']));
-$m_subject = strip_tags(htmlspecialchars($_POST['subject']));
-$message = strip_tags(htmlspecialchars($_POST['message']));
-
-$to = "ahmedtlyba010@gmail.com";
-$subject = "$m_subject:  $name";
-$body = "You have received a new message from your website contact form.\n\n"."Here are the details:\n\nName: $name\n\nEmail: $email\n\nSubject: $m_subject\n\nMessage: $message";
-$header = "From: $email\r\n"; // Separate headers with "\r\n"
-$header .= "Reply-To: $email\r\n";	
-
-if(!mail($to, $subject, $body, $header)) {
-  http_response_code(500);
-  echo "Failed to send email."; // Provide an error message
-  error_log("Failed to send email."); // Log the error
-}
 ?>
